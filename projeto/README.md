@@ -1,6 +1,6 @@
-# projeto
+# Projeto
 
-A new Flutter project.
+Esse projeto é destinado à conclusão do curso **Aprender e Crescer 2020**.
 
 ## Getting Started
 
