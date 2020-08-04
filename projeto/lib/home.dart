@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projeto/company.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -8,6 +9,46 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  Future<String> createAlertDialog(BuildContext context) {
+
+    TextEditingController searchCompanyController = new TextEditingController();
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            'Procure por cidade',
+          ),
+          content: TextField(
+            controller: searchCompanyController,
+            decoration: InputDecoration(
+              labelText: 'Empresa',
+              hintText: 'ex: Dois Vizinhos',
+            ),
+          ),
+          actions: <Widget>[
+            MaterialButton(
+              elevation: 5.0,
+              child: Text(
+                'Procurar',
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(searchCompanyController.text.toString());
+              },
+            ),
+          ],
+        );
+      }
+    );
+  }
+
+  @override
+  void initState(){
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,7 +132,6 @@ class _HomeState extends State<Home> {
                   child: Column(
                     children: <Widget>[
                       FlatButton(
-                        onPressed: () {},
                         child: Text(
                           'Empresas',
                           textAlign: TextAlign.center,
@@ -103,6 +143,17 @@ class _HomeState extends State<Home> {
                         color: Colors.purple[900],
                         splashColor: Colors.deepPurple[900],
                         padding: EdgeInsets.only(bottom: 10.0, top: 10.0, left: 80.0, right: 80.0),
+                        onPressed: () {
+                          //NÃO TÁ DANDO CERTO O SNACKBAR!
+                          //MAS TA PEGANDO O NOME DA CITY :D
+                          createAlertDialog(context).then((value) {
+                            print(value);
+                            //setState(() {
+                              SnackBar mySnackBar = SnackBar(content: Text("Hello $value"));
+                              Scaffold.of(context).showSnackBar(mySnackBar);
+                            //});
+                          });
+                        },
                       ),
 
                       SizedBox(
@@ -110,7 +161,6 @@ class _HomeState extends State<Home> {
                       ),
 
                       FlatButton(
-                        onPressed: () {},
                         child: Text(
                           'Cadastrar',
                           textAlign: TextAlign.center,
@@ -125,6 +175,11 @@ class _HomeState extends State<Home> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) => Company(),
+                          ));
+                        },
                       ),
                     ],
                   ),
