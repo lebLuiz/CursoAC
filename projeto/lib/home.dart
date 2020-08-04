@@ -24,7 +24,11 @@ class _HomeState extends State<Home> {
           content: TextField(
             controller: searchCompanyController,
             decoration: InputDecoration(
-              labelText: 'Empresa',
+              hintStyle: TextStyle(
+                color: Colors.black54,
+              ),
+              labelStyle: TextStyle(color: Colors.purple[900],fontSize: 18),
+              labelText: 'Cidade',
               hintText: 'ex: Dois Vizinhos',
             ),
           ),
@@ -33,6 +37,10 @@ class _HomeState extends State<Home> {
               elevation: 5.0,
               child: Text(
                 'Procurar',
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500
+                ),
               ),
               onPressed: () {
                 Navigator.of(context).pop(searchCompanyController.text.toString());
@@ -53,7 +61,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
+      body: Builder(
+        builder: (context) {
+          return ListView(
         children: <Widget>[
           Stack(
             children: <Widget>[
@@ -144,14 +154,21 @@ class _HomeState extends State<Home> {
                         splashColor: Colors.deepPurple[900],
                         padding: EdgeInsets.only(bottom: 10.0, top: 10.0, left: 80.0, right: 80.0),
                         onPressed: () {
-                          //NÃO TÁ DANDO CERTO O SNACKBAR!
-                          //MAS TA PEGANDO O NOME DA CITY :D
                           createAlertDialog(context).then((value) {
                             print(value);
-                            //setState(() {
-                              SnackBar mySnackBar = SnackBar(content: Text("Hello $value"));
+                            if(value == null || value == "") {
+                              SnackBar mySnackBar = SnackBar(content: Text(
+                                "Nenhuma Cidade Inserida!",
+                                style: GoogleFonts.roboto(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500
+                                ),
+                                ));
                               Scaffold.of(context).showSnackBar(mySnackBar);
-                            //});
+                            }else{
+                              SnackBar mySnackBar = SnackBar(content: Text("TESTE(VAI IR PARA TELA DE EMPRESAS DA CITY) $value"));
+                              Scaffold.of(context).showSnackBar(mySnackBar);
+                            }
                           });
                         },
                       ),
@@ -188,6 +205,8 @@ class _HomeState extends State<Home> {
             ],
           )
         ],
+      );
+        },
       ),
     );
   }
