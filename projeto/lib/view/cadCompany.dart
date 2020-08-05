@@ -1,17 +1,55 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projeto/controllerCompany.dart';
 
-class Company extends StatefulWidget {
+class CadCompany extends StatefulWidget {
   @override
-  _CompanyState createState() => _CompanyState();
+  _CadCompanyState createState() => _CadCompanyState();
 }
 
-class _CompanyState extends State<Company> {
+class _CadCompanyState extends State<CadCompany> {
+
+
+  Future<Company> futureCompany;
+  
+  @override
+  void initState() {
+    super.initState();
+    futureCompany = getStates();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(
+      title: 'Estados',
+      theme: ThemeData(
+        primarySwatch: Colors.yellow
+      ),
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('ESTADOS'),
+        ),
+        body: Center(
+          child: FutureBuilder<Company>(
+            future: futureCompany,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                /*return Flexible(
+                  child: createListView(),
+                );*/
+                return Text("Estado: ${snapshot.data.nome} \n Sigla: ${snapshot.data.sigla}");
+              } else if(snapshot.hasError) {
+                return Text('${snapshot.error}');
+              }
+
+              return CircularProgressIndicator();
+            },
+          ),
+        ),
+      ),
+    );
+    /*return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
@@ -133,9 +171,15 @@ class _CompanyState extends State<Company> {
           ],
         ),
       ),
-    );
+    );*/
   }
 }
+
+/*Widget createListView() {
+  return new ListView.builder(
+    itemCount: ,
+  );
+}*/
 
 InputDecoration myDecoration(String title){
   InputDecoration _decorations = InputDecoration(
