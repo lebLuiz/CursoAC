@@ -16,40 +16,13 @@ class _CadCompanyState extends State<CadCompany> {
   @override
   void initState() {
     super.initState();
-    futureCompany = getStates();
+    //futureCompany = getStates();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Estados',
-      theme: ThemeData(
-        primarySwatch: Colors.yellow
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('ESTADOS'),
-        ),
-        body: Center(
-          child: FutureBuilder<Company>(
-            future: futureCompany,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                /*return Flexible(
-                  child: createListView(),
-                );*/
-                return Text("Estado: ${snapshot.data.nome}");
-              } else if(snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-
-              return CircularProgressIndicator();
-            },
-          ),
-        ),
-      ),
-    );
-    /*return Scaffold(
+    
+    return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
@@ -171,7 +144,7 @@ class _CadCompanyState extends State<CadCompany> {
           ],
         ),
       ),
-    );*/
+    );
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projeto/view/cadCompany.dart';
+import 'package:projeto/view/testApi.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -194,7 +195,7 @@ class _HomeState extends State<Home> {
                         ),
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => CadCompany(),
+                            builder: (context) => TestApi(),
                           ));
                         },
                       ),

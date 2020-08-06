@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 final listC = List<Company>();
 
-Future<Company> getStates() async {
+Future<List<Company>> getStates() async {
   final res = await http.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
   /*final c = Company(nome: '${res.body}');
   c.nome = '${res.body}/nome';*/
@@ -15,8 +15,11 @@ Future<Company> getStates() async {
   print({'ESTADOS' : res.body});
   if(res.statusCode == 200) {
     //ASSIM DA CERTO:
+    List jsonRes = json.decode(res.body);
+    return jsonRes.map((v) => new Company.fromJson(v)).toList();
+    
 
-    return Company.fromJson(json.decode(res.body.toString()));
+    //return Company.fromJson(json.decode(res.body.toString()));
     /*for (int i=0; i<=27; i++) {
       final r = '${res.body}/${i}';
 
@@ -40,10 +43,10 @@ class Company {
   final int id;
   final String sigla;
   final String nome;
-  final Regiao regiao;
-  final List<String> c;
+  /*final Regiao regiao;
+  final List<String> c;*/
 
-  Company({this.id, this.sigla, this.nome, this.regiao, this.c});
+  Company({this.id, this.sigla, this.nome /*this.regiao, this.c*/});
 
   factory Company.fromJson(Map<String, dynamic> json) {
     /*id = json['id'];
@@ -52,15 +55,14 @@ class Company {
     regiao =
         json['regiao'] != null ? new Regiao.fromJson(json['regiao']) : null;
 */
-    var cFromJson = json['nome'];
-    List<String> cList = cFromJson.cast<String>();
+    /*var cFromJson = json['nome'];
+    List<String> cList = cFromJson.cast<String>();*/
 
     return Company(
       id: json['id'],
       sigla: json['sigla'],
       nome: json['nome'],
-      regiao: json['regiao'],
-      c: cList,
+      // regiao: json['regiao'],
     );
   }
 
@@ -69,9 +71,9 @@ class Company {
     data['id'] = this.id;
     data['sigla'] = this.sigla;
     data['nome'] = this.nome;
-    if (this.regiao != null) {
+    /*if (this.regiao != null) {
       data['regiao'] = this.regiao.toJson();
-    }
+    }*/
     return data;
   }
 }
