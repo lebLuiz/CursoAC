@@ -38,7 +38,7 @@ class _CadCompanyState extends State<CadCompany> {
                 /*return Flexible(
                   child: createListView(),
                 );*/
-                return Text("Estado: ${snapshot.data.nome} \n Sigla: ${snapshot.data.sigla}");
+                return Text("Estado: ${snapshot.data.nome}");
               } else if(snapshot.hasError) {
                 return Text('${snapshot.error}');
               }

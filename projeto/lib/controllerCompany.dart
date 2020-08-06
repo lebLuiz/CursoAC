@@ -7,15 +7,16 @@ final listC = List<Company>();
 
 Future<Company> getStates() async {
   final res = await http.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-  final c = Company(nome: '${res.body}');
-  c.nome = '${res.body}/nome';
+  /*final c = Company(nome: '${res.body}');
+  c.nome = '${res.body}/nome';*/
 
   //NO PRINT PUXA TODAS AS CIDADES.
   //N SEI COMO FAZER PARA MOSTRAR EM UM WIDGET...
-  print({'ESTADOS' : c.nome});
+  print({'ESTADOS' : res.body});
   if(res.statusCode == 200) {
     //ASSIM DA CERTO:
-    return Company.fromJson(json.decode('${c.toJson()}'));
+
+    return Company.fromJson(json.decode(res.body.toString()));
     /*for (int i=0; i<=27; i++) {
       final r = '${res.body}/${i}';
 
@@ -35,35 +36,93 @@ Future<Company> getStates() async {
   }
 }
 
-void totItens(){
+class Company {
+  final int id;
+  final String sigla;
+  final String nome;
+  final Regiao regiao;
+  final List<String> c;
 
+  Company({this.id, this.sigla, this.nome, this.regiao, this.c});
+
+  factory Company.fromJson(Map<String, dynamic> json) {
+    /*id = json['id'];
+    sigla = json['sigla'];
+    nome = json['nome'];
+    regiao =
+        json['regiao'] != null ? new Regiao.fromJson(json['regiao']) : null;
+*/
+    var cFromJson = json['nome'];
+    List<String> cList = cFromJson.cast<String>();
+
+    return Company(
+      id: json['id'],
+      sigla: json['sigla'],
+      nome: json['nome'],
+      regiao: json['regiao'],
+      c: cList,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['sigla'] = this.sigla;
+    data['nome'] = this.nome;
+    if (this.regiao != null) {
+      data['regiao'] = this.regiao.toJson();
+    }
+    return data;
+  }
 }
 
-class Company {
+class Regiao {
   int id;
   String sigla;
   String nome;
 
-  Company({
-    @required this.id,
-    @required this.sigla,
-    @required this.nome
-  });
+  Regiao({this.id, this.sigla, this.nome});
 
-  Company.fromJson(Map<String, dynamic> json) {
+  Regiao.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sigla = json['sigla'];
     nome = json['nome'];
   }
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['sigla'] = this.sigla;
     data['nome'] = this.nome;
+    return data;
   }
-  
 }
+
+// class Company {
+//   int id;
+//   String sigla;
+//   String nome;
+
+//   Company({
+//     @required this.id,
+//     @required this.sigla,
+//     @required this.nome
+//   });
+
+//   Company.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//     sigla = json['sigla'];
+//     nome = json['nome'];
+//   }
+
+//   Map<String, dynamic> toJson(){
+//     final Map<String, dynamic> data = new Map<String, dynamic>();
+//     data['id'] = this.id;
+//     data['sigla'] = this.sigla;
+//     data['nome'] = this.nome;
+//   }
+  
+// }
 
 /*class Company{
   int id;
