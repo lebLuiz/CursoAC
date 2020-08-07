@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projeto/company.dart';
 import 'package:projeto/controllerCompany.dart';
+import 'package:projeto/database.dart';
 
 class CadCompany extends StatefulWidget {
   @override
@@ -9,30 +11,98 @@ class CadCompany extends StatefulWidget {
 }
 
 class _CadCompanyState extends State<CadCompany> {
+  String typeBussines = 'Industrial';
+  //Future<Company> futureCompany;
 
+  final _empresaController = TextEditingController();
+  final _cnpjController = TextEditingController();
+  final _responsavelController = TextEditingController();
+  final _telefoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _enderecoController = TextEditingController();
+  final _endereco2Controller = TextEditingController();
+  final _estadoController = TextEditingController();
+  final _cidadeController = TextEditingController();
+  final _ramoController = TextEditingController();
 
-  Future<Company> futureCompany;
-  
+  final _formKey = GlobalKey<FormState>();
+
+  List<Empresa> _toDoList = [];
+  Empresa _lastRemoved;
+
   @override
   void initState() {
     super.initState();
+    DBProvider.db.initDB();
     //futureCompany = getStates();
   }
 
+  Future<void> getCompanies() async{
+    List res = await DBProvider.db.selectAll();
+
+    _toDoList = [];
+
+    res.forEach((element) {
+      _toDoList.add(Empresa.fromJson(element));
+    });
+    print('Os dados: \"${res.asMap()}\" ');
+  }
+
+  void _addCompany() {
+    setState(() {
+      final e = Empresa(
+        id: DateTime.now().millisecondsSinceEpoch,
+        empresa: _empresaController.text,
+        cnpj: _cnpjController.text,
+        responsavel: _responsavelController.text,
+        telefone: _telefoneController.text,
+        email: _emailController.text,
+        endereco: _enderecoController.text,
+        endereco2: _endereco2Controller.text,
+        estado: _estadoController.text,
+        cidade: _cidadeController.text,
+        ramo: _ramoController.text
+      );
+
+      DBProvider.db.insert(e.toJson());
+
+      //SNACK-BAR PARA AVISAR UM OK-SUCESSO!
+      SnackBar snkBar = SnackBar(
+        content: Text('${Icons.beenhere} - ${_empresaController.text} cadastrado com sucesso'),
+      );
+      print('FOI - ${_empresaController.text}');
+      //Scaffold.of(context).showSnackBar(snkBar);
+
+      getCompanies();
+
+
+      _empresaController.text = '';
+      _cnpjController.text = '';
+      _responsavelController.text = '';
+      _telefoneController.text = '';
+      _emailController.text = '';
+      _enderecoController.text = '';
+      _endereco2Controller.text = '';
+      _estadoController.text = '';
+      _cidadeController.text = '';
+      _ramoController.text = '';
+    });
+  }
+
+
+  //LAYOUT EM SI
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           "Cadastrar Empresa",
           style: GoogleFonts.ubuntu(
-            fontSize: 26,
-            fontWeight: FontWeight.w500,
-            wordSpacing: 2.0,
-            letterSpacing: 0.0
-          ),
+              fontSize: 26,
+              fontWeight: FontWeight.w500,
+              wordSpacing: 2.0,
+              letterSpacing: 0.0),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -44,103 +114,244 @@ class _CadCompanyState extends State<CadCompany> {
         elevation: 0.0,
         backgroundColor: Colors.deepPurple[900],
       ),
-
       body: Padding(
         padding: EdgeInsets.all(25.0),
         child: ListView(
           scrollDirection: Axis.vertical,
           padding: EdgeInsets.all(3.0),
           children: <Widget>[
-            TextFormField(
+            Form(
+              autovalidate: true,
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  TextFormField(
               keyboardType: TextInputType.text,
               decoration: myDecoration("Empresa"),
-              style: GoogleFonts.ubuntu(
-                color: Colors.black,
-                fontSize: 22
-              ),
-              controller: null,//companyController,
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _empresaController,
               validator: (value) {
-                print(value);
-                if(value.isEmpty){
+                
+                if (value.isEmpty) {
                   return "Preencha o campo";
                 } else {
                   return null;
                 }
               },
             ),
-
             SizedBox(
               height: 15,
             ),
-
             TextFormField(
               keyboardType: TextInputType.number,
               decoration: myDecoration("CNPJ"),
-              style: GoogleFonts.ubuntu(
-                color: Colors.black,
-                fontSize: 22
-              ),
-              controller: null,//companyController,
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _cnpjController,
               validator: (value) {
-                print(value);
-                if(value.isEmpty){
+                
+                if (value.isEmpty) {
                   return "Preencha o campo";
                 } else {
                   return null;
                 }
               },
             ),
-
             SizedBox(
               height: 15,
             ),
-
             TextFormField(
               keyboardType: TextInputType.text,
               decoration: myDecoration("Responsável"),
-              style: GoogleFonts.ubuntu(
-                color: Colors.black,
-                fontSize: 22
-              ),
-              controller: null,//companyController,
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _responsavelController,
               validator: (value) {
-                print(value);
-                if(value.isEmpty){
+                
+                if (value.isEmpty) {
                   return "Preencha o campo";
                 } else {
                   return null;
                 }
               },
             ),
-
             SizedBox(
               height: 15,
             ),
-
             TextFormField(
               keyboardType: TextInputType.phone,
               decoration: myDecoration("Telefone"),
-              style: GoogleFonts.ubuntu(
-                color: Colors.black,
-                fontSize: 22
-              ),
-              controller: null,//companyController,
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _telefoneController,
               validator: (value) {
-                print(value);
-                if(value.isEmpty){
+                
+                if (value.isEmpty) {
                   return "Preencha o campo";
                 } else {
                   return null;
                 }
               },
             ),
-
             SizedBox(
               height: 15,
             ),
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: myDecoration("E-mail"),
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _emailController,
+              validator: (value) {
+                
+                if (value.isEmpty) {
+                  return "Preencha o campo";
+                } else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: myDecoration("Endereço"),
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _enderecoController,
+              validator: (value) {
+                
+                if (value.isEmpty) {
+                  return "Preencha o campo";
+                } else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: myDecoration("N°-Complemento"),
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _endereco2Controller,
+              validator: (value) {
+                
+                if (value.isEmpty) {
+                  return "Preencha o campo";
+                } else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: myDecoration("Estado"),
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _estadoController,
+              validator: (value) {
+                
+                if (value.isEmpty) {
+                  return "Preencha o campo";
+                } else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.text,
+              decoration: myDecoration("Cidade"),
+              style: GoogleFonts.ubuntu(color: Colors.black, fontSize: 22),
+              controller: _cidadeController,
+              validator: (value) {
+                
+                if (value.isEmpty) {
+                  return "Preencha o campo";
+                } else {
+                  return null;
+                }
+              },
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Ramo de Atuação',
+                    textAlign: TextAlign.center,
+                    style:
+                        GoogleFonts.ubuntu(fontSize: 22, color: Colors.black),
+                  ),
+                  DropdownButton<String>(
+                    value: typeBussines,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 32,
+                    elevation: 18,
+                    style: TextStyle(color: Colors.deepPurple),
+                    underline: Container(
+                      height: 4,
+                      color: Colors.deepPurpleAccent,
+                    ),
+                    onChanged: (String newValue) {
+                      setState(() {
+                        typeBussines = newValue;
+                        print(typeBussines);
+                      });
+                    },
+                    items: <String>[
+                      'Industrial',
+                      'Comercial',
+                      'Prestação de Serviços'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.ubuntu(
+                              fontSize: 24, fontWeight: FontWeight.w500),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
 
-            //TEM MAIS, NAO ACABOU!
-            
+            SizedBox(
+              height: 5,
+            ),
+
+            FlatButton(
+              child: Text(
+                'Cadastrar',
+                textAlign: TextAlign.center,
+                style: GoogleFonts.ubuntu(
+                  color: Colors.white,
+                  fontSize: 28,
+                ),
+              ),
+              color: Colors.purple[900],
+              splashColor: Colors.deepPurple[900],
+              padding: EdgeInsets.only(
+                  bottom: 10.0, top: 10.0, left: 80.0, right: 80.0),
+              onPressed: () {
+                if(_formKey.currentState.validate()){
+                  _addCompany();
+                }
+              },
+            ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -148,13 +359,8 @@ class _CadCompanyState extends State<CadCompany> {
   }
 }
 
-/*Widget createListView() {
-  return new ListView.builder(
-    itemCount: ,
-  );
-}*/
-
-InputDecoration myDecoration(String title){
+//PADRÃO DE DECORAÇÃO DOS INPUT'S
+InputDecoration myDecoration(String title) {
   InputDecoration _decorations = InputDecoration(
     labelText: title,
     labelStyle: TextStyle(fontSize: 20, color: Colors.black),
