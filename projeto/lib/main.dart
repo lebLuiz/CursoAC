@@ -5,6 +5,8 @@ import 'package:projeto/view/home.dart';
 import 'package:projeto/view/testApi.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   LicenseRegistry.addLicense(() async* {
     final license = await rootBundle.loadString('google_fonts/UFL.txt');
     yield LicenseEntryWithLineBreaks(['google_fonts'], license);

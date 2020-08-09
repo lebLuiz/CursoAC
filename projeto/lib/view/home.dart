@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:projeto/company.dart';
+import 'package:projeto/database.dart';
 import 'package:projeto/view/cadCompany.dart';
+import 'package:projeto/view/companies.dart';
 import 'package:projeto/view/testApi.dart';
 
 class Home extends StatefulWidget {
@@ -10,6 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+
+  List<Empresa> _toDoList = [];
 
   Future<String> createAlertDialog(BuildContext context) {
 
@@ -53,9 +58,23 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Future<List<Empresa>> getEmpresas(String cidade) async {
+    //List res = await DBProvider.db.selectAll();
+    List res = await DBProvider.db.selectByCity(cidade);
+    _toDoList = [];
+
+    res.forEach((element) {
+      _toDoList.add(Empresa.fromJson(element));
+      print("Os dados: $element");
+    });
+    print('Quantidade de items: \"${_toDoList.length}\" ');
+    return _toDoList;
+  }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
+    DBProvider.db.initDB();
   }
 
   @override
@@ -167,8 +186,15 @@ class _HomeState extends State<Home> {
                                 ));
                               Scaffold.of(context).showSnackBar(mySnackBar);
                             }else{
-                              SnackBar mySnackBar = SnackBar(content: Text("TESTE(VAI IR PARA TELA DE EMPRESAS DA CITY) $value"));
-                              Scaffold.of(context).showSnackBar(mySnackBar);
+                              // //getEmpresas(value);
+                              // SnackBar mySnackBar = SnackBar(content: Text("TESTE(VAI IR PARA TELA DE EMPRESAS DA CITY) $value"));
+                              // Scaffold.of(context).showSnackBar(mySnackBar);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) { return ListCompanies(city: value);},
+                                ),
+                              );
                             }
                           });
                         },

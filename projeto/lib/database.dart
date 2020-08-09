@@ -35,9 +35,9 @@ class DBProvider {
     return await db.query("empresa");
   }
 
-  selectByCity(Map<String, dynamic> values, String cidade) async {
+  selectByCity(String cidade) async {
     final db = await database;
-    return await db.rawQuery("SELECT * FROM empresa WHERE cidade = $cidade");
+    return await db.rawQuery("SELECT * FROM empresa WHERE cidade LIKE '%$cidade%'");
   }
 
   insert(Map<String, dynamic> values) async {
