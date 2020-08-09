@@ -176,7 +176,7 @@ class _HomeState extends State<Home> {
                         onPressed: () {
                           createAlertDialog(context).then((value) {
                             print(value);
-                            if(value == null || value == "") {
+                            if(value == null || value == "" || value.trim().isEmpty) {
                               SnackBar mySnackBar = SnackBar(content: Text(
                                 "Nenhuma Cidade Inserida!",
                                 style: GoogleFonts.roboto(

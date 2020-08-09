@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:projeto/view/companyEspecific.dart';
 import 'package:projeto/view/home.dart';
 import 'package:projeto/view/testApi.dart';
 
@@ -42,7 +43,15 @@ class _MyProjectState extends State<MyProject> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home(),
+      routes: {
+        AppRoutes.HOME: (_) => Home(),
+        AppRoutes.COMPANY_ESPECIFIC: (_) => CompanyEspecific(),
+      },
     );
   }
+}
+
+class AppRoutes {
+  static const HOME = '/';
+  static const COMPANY_ESPECIFIC = '/company-especific';
 }

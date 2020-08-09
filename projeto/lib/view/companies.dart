@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:projeto/company.dart';
 import 'package:projeto/database.dart';
+import 'package:projeto/main.dart';
 
 class ListCompanies extends StatefulWidget {
   final String city;
@@ -13,7 +14,6 @@ class ListCompanies extends StatefulWidget {
 }
 
 class _ListCompaniesState extends State<ListCompanies> {
-
   List<Empresa> _toDoList = [];
 
   Future<List<Empresa>> getEmpresas() async {
@@ -27,6 +27,51 @@ class _ListCompaniesState extends State<ListCompanies> {
     });
     print('Quantidade de items: \"${_toDoList.length}\" ');
     return _toDoList;
+  }
+
+  Widget _listCompanies(BuildContext context) {
+    getEmpresas();
+    if (_toDoList.length == 0) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Text(
+            'Nem uma empresa encontrada nessa cidade.',
+            textAlign: TextAlign.center,
+            style:
+                GoogleFonts.roboto(fontSize: 22, fontWeight: FontWeight.bold),
+          ),
+        ],
+      );
+    } else {
+      for (final item in _toDoList) {
+        return ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.black,
+            child: Icon(Icons.business_center),
+          ),
+          title: Text(item.empresa),
+          subtitle: Text('${item.ramo}  -  ${item.telefone}'),
+          trailing: Container(
+            width: 100,
+            child: Row(
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.input),
+                  color: Colors.purple[900],
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(
+                      AppRoutes.COMPANY_ESPECIFIC,
+                      arguments: item,
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      }
+    }
   }
 
   @override
@@ -51,17 +96,9 @@ class _ListCompaniesState extends State<ListCompanies> {
         elevation: 0.0,
         backgroundColor: Colors.deepPurple[900],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Builder(
-            builder: (_)  {
-              getEmpresas();
-              return Text('${widget.city}');
-            },
-          ),
-        ],
-      )
+      body: ListView.builder(
+        itemBuilder: (ctx, i) => _listCompanies(context),
+      ),
     );
   }
 }
