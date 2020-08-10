@@ -3,18 +3,87 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:projeto/company.dart';
 import 'package:projeto/database.dart';
 import 'package:projeto/main.dart';
+import 'package:projeto/view/list_repository.dart';
 
 class ListCompanies extends StatefulWidget {
   final String city;
 
-  const ListCompanies({Key key, this.city});
+  const ListCompanies({Key key, this.city}) : super(key: key);
 
   @override
   _ListCompaniesState createState() => _ListCompaniesState();
 }
 
 class _ListCompaniesState extends State<ListCompanies> {
-  List<Empresa> _toDoList = [];
+  final _empresas = List<Empresa>();
+
+  // Future<List<Empresa>> getEmpresas() async {
+  //   //List res = await DBProvider.db.selectAll();
+  //   List res = await DBProvider.db.selectByCity('Dois Vizinhos');
+  //   //_toDoList = [];
+
+  //   res.forEach((element) {
+  //     _empresas.add(Empresa.fromJson(element));
+  //     print("Os dados: $element");
+  //   });
+  //   print('Quantidade de items: \"${_empresas.length}\" ');
+  //   return _empresas;
+  // }
+
+  Future<void> getEmpresas() async {
+    List response = await DBProvider.db.selectByCity(widget.city);
+
+    response.forEach((element) {
+      _empresas.add(Empresa.fromJson(element));
+    });
+
+    print('Quantidade Empresas: ${_empresas.length}');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Empresas Encontradas",
+          style: GoogleFonts.ubuntu(
+              fontSize: 26,
+              fontWeight: FontWeight.w500,
+              wordSpacing: 2.0,
+              letterSpacing: 0.0),
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        elevation: 0.0,
+        backgroundColor: Colors.purple[900],
+      ),
+      body: FutureBuilder(
+          future: getEmpresas(),
+          builder: (ctx, i) {
+            return Container(
+              alignment: Alignment.center,
+              padding: EdgeInsets.all(10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    child: ListRepository(
+                      empresas: _empresas,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+    );
+  }
+
+  /*List<Empresa> _toDoList = [];
 
   Future<List<Empresa>> getEmpresas() async {
     //List res = await DBProvider.db.selectAll();
@@ -30,8 +99,9 @@ class _ListCompaniesState extends State<ListCompanies> {
   }
 
   Widget _listCompanies(BuildContext context) {
+
     getEmpresas();
-    if (_toDoList.length == 0) {
+    if (_toDoList.length <= 0) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
@@ -97,8 +167,10 @@ class _ListCompaniesState extends State<ListCompanies> {
         backgroundColor: Colors.deepPurple[900],
       ),
       body: ListView.builder(
-        itemBuilder: (ctx, i) => _listCompanies(context),
+        itemBuilder: (ctx, i) {
+          return _listCompanies(context);
+        },
       ),
     );
-  }
+  }*/
 }

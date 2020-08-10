@@ -28,18 +28,31 @@ class Empresa {
     @required this.ramo,
   });
 
-  Empresa.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    empresa = json['empresa'];
-    empresa = json['cnpj'];
-    empresa = json['responsavel'];
-    empresa = json['telefone'];
-    empresa = json['email'];
-    empresa = json['endereco'];
-    empresa = json['endereco2'];
-    empresa = json['estado'];
-    empresa = json['cidade'];
-    empresa = json['ramo'];
+  factory Empresa.fromJson(Map<String, dynamic> json) {
+    return Empresa(
+      id: json['id'],
+      empresa: json['empresa'],
+      cnpj: json['cnpj'],
+      responsavel: json['responsavel'],
+      telefone: json['telefone'],
+      email: json['email'],
+      endereco: json['endereco'],
+      endereco2: json['endereco2'],
+      estado: json['estado'],
+      cidade: json['cidade'],
+      ramo: json['ramo'],
+    );
+    // id = json['id'];
+    // empresa = json['empresa'];
+    // empresa = json['cnpj'];
+    // empresa = json['responsavel'];
+    // empresa = json['telefone'];
+    // empresa = json['email'];
+    // empresa = json['endereco'];
+    // empresa = json['endereco2'];
+    // empresa = json['estado'];
+    // empresa = json['cidade'];
+    // empresa = json['ramo'];
   }
 
   Map<String, dynamic> toJson() {

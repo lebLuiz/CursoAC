@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:projeto/view/companies.dart';
 import 'package:projeto/view/companyEspecific.dart';
 import 'package:projeto/view/home.dart';
 import 'package:projeto/view/testApi.dart';
@@ -46,6 +47,7 @@ class _MyProjectState extends State<MyProject> {
       routes: {
         AppRoutes.HOME: (_) => Home(),
         AppRoutes.COMPANY_ESPECIFIC: (_) => CompanyEspecific(),
+        AppRoutes.COMPANIES: (_) => ListCompanies(),
       },
     );
   }
@@ -54,4 +56,5 @@ class _MyProjectState extends State<MyProject> {
 class AppRoutes {
   static const HOME = '/';
   static const COMPANY_ESPECIFIC = '/company-especific';
+  static const COMPANIES = '/companies';
 }

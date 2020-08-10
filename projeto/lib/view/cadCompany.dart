@@ -107,7 +107,7 @@ class _CadCompanyState extends State<CadCompany> {
           },
         ),
         elevation: 0.0,
-        backgroundColor: Colors.deepPurple[900],
+        backgroundColor: Colors.purple[900],
       ),
       body: Builder(
         builder: (BuildContext context) {

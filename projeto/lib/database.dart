@@ -40,6 +40,11 @@ class DBProvider {
     return await db.rawQuery("SELECT * FROM empresa WHERE cidade LIKE '%$cidade%'");
   }
 
+  selectById(int id) async {
+    final db = await database;
+    return await db.rawQuery("SELECT * FROM empresa WHERE id = $id");
+  }
+
   insert(Map<String, dynamic> values) async {
     final db = await database;
     return await db.insert("empresa", values);
