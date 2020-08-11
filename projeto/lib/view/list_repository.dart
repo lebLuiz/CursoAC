@@ -10,6 +10,68 @@ class ListRepository extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (empresas.length == 0) {
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: ListView(
+          padding: EdgeInsets.all(8.0),
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 25,
+                    ),
+                    Text(
+                      'Ops! Se perdeu?',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.ubuntu(
+                        color: Colors.purple[900],
+                        fontSize: 33,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      'Não há empresas cadastradas nessa cidade',
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      style: GoogleFonts.roboto(
+                          color: Colors.black,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500,
+                          wordSpacing: 0.3,
+                          letterSpacing: 1),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 60,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Container(
+                      height: 300.0,
+                      width: 300.0,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/not_found.png'),
+                              repeat: ImageRepeat.noRepeat,
+                              fit: BoxFit.contain)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+    }
     return ListView.builder(
       itemBuilder: (context, index) {
         return Card(
@@ -17,7 +79,6 @@ class ListRepository extends StatelessWidget {
           shadowColor: Colors.purple[900],
           child: Column(
             children: <Widget>[
-              
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListTile(
@@ -31,18 +92,16 @@ class ListRepository extends StatelessWidget {
                   title: Text(
                     empresas[index].empresa,
                     style: GoogleFonts.ubuntu(
-                      color: Colors.black,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500
-                    ),
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500),
                   ),
                   subtitle: Text(
                     '${empresas[index].email}\n${empresas[index].telefone}',
                     style: GoogleFonts.roboto(
-                      color: Colors.grey[800],
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15.5
-                    ),
+                        color: Colors.grey[800],
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15.5),
                   ),
                 ),
               ),
@@ -51,9 +110,13 @@ class ListRepository extends StatelessWidget {
                 children: <Widget>[
                   FlatButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => CompanyEspecific(id: empresas[index].id,),
-                      ));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CompanyEspecific(
+                              id: empresas[index].id,
+                            ),
+                          ));
                     },
                     child: Text(
                       'Conhecer',
