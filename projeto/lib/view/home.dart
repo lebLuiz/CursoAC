@@ -18,7 +18,6 @@ class _HomeState extends State<Home> {
 
   Future<String> createAlertDialog(BuildContext context) {
     TextEditingController searchCompanyController = new TextEditingController();
-
     return showDialog(
         context: context,
         builder: (context) {
@@ -68,6 +67,24 @@ class _HomeState extends State<Home> {
     return _toDoList;
   }
 
+  List<Empresa> _toListTest = [];
+  Future<void> getAllEmpresas() async {
+    List res = await DBProvider.db.selectAll();
+
+    _toListTest = [];
+
+    res.forEach((element) {
+      _toListTest.add(Empresa.fromJson(element));
+    });
+
+    return _toListTest;
+  }
+
+  //ATENÇÃO!! - CASO QUEIRA LIMPAR OS DADOS - PARA TESTE
+  // Future<void> deleteAll() async {
+  //   await DBProvider.db.removeAll();
+  // }
+
   @override
   void initState() {
     super.initState();
@@ -76,6 +93,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    getAllEmpresas();
+
+    print('Quant registros ao todo: ${_toListTest.length}');
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Builder(
@@ -169,6 +190,8 @@ class _HomeState extends State<Home> {
                                 left: 80.0,
                                 right: 80.0),
                             onPressed: () {
+                              //ATENÇÃO!! - PARA TESTE
+                              // deleteAll();
                               createAlertDialog(context).then((value) {
                                 print(value);
                                 if (value == null ||
@@ -185,14 +208,13 @@ class _HomeState extends State<Home> {
                                   );
                                   Scaffold.of(context).showSnackBar(mySnackBar);
                                 } else {
-                                  // //getEmpresas(value);
-                                  // SnackBar mySnackBar = SnackBar(content: Text("TESTE(VAI IR PARA TELA DE EMPRESAS DA CITY) $value"));
-                                  // Scaffold.of(context).showSnackBar(mySnackBar);
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ListCompanies(city: value)));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                        ListCompanies(city: value)
+                                    )
+                                  );
                                 }
                               });
                             },

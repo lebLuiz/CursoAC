@@ -24,7 +24,7 @@ class ListRepository extends StatelessWidget {
                       height: 25,
                     ),
                     Text(
-                      'Ops! Se perdeu?',
+                      'Ops! Se perdeu?!',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.ubuntu(
                         color: Colors.purple[900],
@@ -97,7 +97,7 @@ class ListRepository extends StatelessWidget {
                         fontWeight: FontWeight.w500),
                   ),
                   subtitle: Text(
-                    '${empresas[index].email}\n${empresas[index].telefone}',
+                    '${empresas[index].ramo}\n${empresas[index].email}',
                     style: GoogleFonts.roboto(
                         color: Colors.grey[800],
                         fontWeight: FontWeight.w600,

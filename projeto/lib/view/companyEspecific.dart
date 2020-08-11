@@ -87,12 +87,11 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                     Text(
                                       '${_empresa[index].cidade} - ${_empresa[index].estado}',
                                       style: GoogleFonts.roboto(
-                                        fontSize: 17,
-                                        color: Colors.blueGrey[900],
-                                        wordSpacing: 2,
-                                        fontStyle: FontStyle.italic,
-                                        fontWeight: FontWeight.w500
-                                      ),
+                                          fontSize: 17,
+                                          color: Colors.blueGrey[900],
+                                          wordSpacing: 2,
+                                          fontStyle: FontStyle.italic,
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ],
                                 ),
@@ -169,12 +168,9 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                             ),
                                           ],
                                         ),
-
                                         SizedBox(
                                           height: 30,
                                         ),
-
-
                                         Text(
                                           'Endereço',
                                           textAlign: TextAlign.justify,
@@ -230,7 +226,6 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                             ),
                                           ],
                                         ),
-
                                         SizedBox(
                                           height: 30,
                                           child: Divider(
@@ -238,7 +233,6 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                             color: Colors.black,
                                           ),
                                         ),
-
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -282,111 +276,12 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                             ),
                                           ],
                                         ),
-
                                       ],
                                     ),
                                   )),
                             ],
                           ),
-
-                          // Column(
-                          //   children: <Widget>[
-                          //     Card(
-                          //         borderOnForeground: true,
-                          //         color: Colors.indigo[50],
-                          //         elevation: 0,
-                          //         shadowColor: Colors.black,
-                          //         margin: EdgeInsets.all(10.0),
-                          //         child: Padding(
-                          //           padding: const EdgeInsets.all(15.0),
-                          //           child: Column(
-
-                          //             children: <Widget>[
-                                        
-                          //             ],
-                          //           ),
-                          //         )),
-                          //   ],
-                          // ),
-
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: <Widget>[
-                          //     Text(
-                          //       'CNPJ:  ',
-                          //       style: GoogleFonts.ubuntu(
-                          //           color: Colors.black,
-                          //           fontSize: 22,
-                          //           fontWeight: FontWeight.w600),
-                          //     ),
-                          //     Text(
-                          //       _empresa[index].cnpj,
-                          //       style: GoogleFonts.ubuntu(
-                          //           color: Colors.grey[800],
-                          //           fontSize: 20,
-                          //           fontWeight: FontWeight.w500),
-                          //     ),
-                          //   ],
-                          // ),
-                          // SizedBox(
-                          //   height: 30,
-                          // ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.center,
-                          //   children: <Widget>[
-                          //     Text(
-                          //       'Responsável:  ',
-                          //       style: GoogleFonts.ubuntu(
-                          //           color: Colors.black,
-                          //           fontSize: 22,
-                          //           fontWeight: FontWeight.w600),
-                          //     ),
-                          //     Text(
-                          //       _empresa[index].responsavel,
-                          //       style: GoogleFonts.ubuntu(
-                          //           color: Colors.grey[800],
-                          //           fontSize: 20,
-                          //           fontWeight: FontWeight.w500),
-                          //     ),
-                          //   ],
-                          // ),
-                          // SizedBox(
-                          //   height: 30,
-                          // ),
                         ],
-                        // margin: EdgeInsets.all(15.0),
-                        // shadowColor: Colors.purple[900],
-                        // child: Column(
-                        //   children: <Widget>[
-                        //     Padding(
-                        //       padding: const EdgeInsets.all(8.0),
-                        //       child: ListTile(
-                        //         leading: CircleAvatar(
-                        //           child: Icon(
-                        //             Icons.business_center,
-                        //             color: Colors.white,
-                        //           ),
-                        //           backgroundColor: Colors.black,
-                        //         ),
-                        //         title: Text(
-                        //           _empresa[index].empresa,
-                        //           style: GoogleFonts.ubuntu(
-                        //               color: Colors.black,
-                        //               fontSize: 22,
-                        //               fontWeight: FontWeight.w500),
-                        //         ),
-                        //         subtitle: Text(
-                        //           _empresa[index].email,
-                        //           style: GoogleFonts.roboto(
-                        //               color: Colors.grey[800],
-                        //               fontWeight: FontWeight.w600,
-                        //               fontSize: 15.5),
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                        // elevation: 8.0,
                       );
                     },
                     itemCount: _empresa.length,

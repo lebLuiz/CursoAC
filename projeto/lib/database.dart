@@ -60,4 +60,10 @@ class DBProvider {
     return await db.delete("empresa", where: "id = ?", whereArgs: [id]);
   }
 
+  //FUNCTION CRIADA PARA TESTE
+  removeAll() async {
+    final db = await database;
+    return await db.delete("empresa");
+  }
+
 }

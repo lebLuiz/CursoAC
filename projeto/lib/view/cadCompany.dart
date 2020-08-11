@@ -63,8 +63,8 @@ class _CadCompanyState extends State<CadCompany> {
         endereco2: _endereco2Controller.text,
         estado: _estadoController.text,
         cidade: _cidadeController.text,
-        ramo: _carg
-        //ramo: _ramoController.text,
+        //ramo: _carg
+        ramo: _ramoController.text,
       );
 
       DBProvider.db.insert(e.toJson());
@@ -80,8 +80,8 @@ class _CadCompanyState extends State<CadCompany> {
       _endereco2Controller.text = '';
       _estadoController.text = '';
       _cidadeController.text = '';
-      _carg = '';
-      //_ramoController.text = '';
+      //_carg = '';
+      _ramoController.text = '';
     });
   }
 
@@ -117,6 +117,24 @@ class _CadCompanyState extends State<CadCompany> {
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.all(3.0),
               children: <Widget>[
+                Text(
+                  'Dados da Entidade',
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.openSans(
+                    color: Colors.purple[900],
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                  child: Divider(
+                    color: Colors.black,
+                    height: 15,
+                    thickness: 1.5,
+                  ),
+                ),
                 Form(
                   autovalidate: true,
                   key: _formKey,
@@ -208,6 +226,9 @@ class _CadCompanyState extends State<CadCompany> {
                       SizedBox(
                         height: 15,
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       TextFormField(
                         keyboardType: TextInputType.text,
                         decoration: myDecoration("Endereço"),
@@ -239,6 +260,7 @@ class _CadCompanyState extends State<CadCompany> {
                           }
                         },
                       ),
+
                       SizedBox(
                         height: 15,
                       ),
@@ -278,95 +300,95 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
 
                       //CASO DER B.O COM O DropDownButton, USO O TextFormField
-                      // TextFormField(
-                      //   keyboardType: TextInputType.text,
-                      //   decoration: InputDecoration(
-                      //     labelText: 'Ramo',
-                      //     labelStyle:
-                      //         TextStyle(fontSize: 20, color: Colors.black),
-                      //     alignLabelWithHint: true,
-                      //     hintText: 'ex: Industrial',
-                      //     hintStyle: TextStyle(
-                      //       fontSize: 20.0,
-                      //       color: Colors.black54,
-                      //     ),
-                      //     errorStyle: TextStyle(
-                      //       height: 0,
-                      //       fontSize: 0,
-                      //       color: Colors.red,
-                      //     ),
-                      //     border: OutlineInputBorder(
-                      //       borderSide: BorderSide(
-                      //         color: Colors.black,
-                      //         width: 2,
-                      //       ),
-                      //     ),
-                      //     counterStyle: TextStyle(color: Colors.black),
-                      //     filled: true,
-                      //     fillColor: Colors.grey[100],
-                      //   ),
-                      //   style: GoogleFonts.ubuntu(
-                      //       color: Colors.black, fontSize: 22),
-                      //   controller: _ramoController,
-                      //   validator: (value) {
-                      //     if (value.isEmpty) {
-                      //       return "Preencha o campo";
-                      //     } else {
-                      //       return null;
-                      //     }
-                      //   },
-                      // ),
-
-                      Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              'Ramo de Atuação',
-                              textAlign: TextAlign.center,
-                              style:
-                                  GoogleFonts.ubuntu(fontSize: 22, color: Colors.black),
+                      TextFormField(
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                          labelText: 'Ramo de Atuação',
+                          labelStyle:
+                              TextStyle(fontSize: 20, color: Colors.black),
+                          alignLabelWithHint: true,
+                          hintText: 'ex: Industrial',
+                          hintStyle: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.black54,
+                          ),
+                          errorStyle: TextStyle(
+                            height: 0,
+                            fontSize: 0,
+                            color: Colors.red,
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.black,
+                              width: 2,
                             ),
-                            DropdownButton<String>(
-                              value: typeBussines,
-                              icon: Icon(Icons.arrow_downward),
-                              iconSize: 32,
-                              elevation: 18,
-                              style: TextStyle(color: Colors.deepPurple),
-                              underline: Container(
-                                height: 4,
-                                color: Colors.deepPurpleAccent,
-                              ),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  typeBussines = newValue;
-                                  _carg = typeBussines;
-                                  print(_carg);
-                                });
-                              },
-                              items: <String>[
-                                'Industrial',
-                                'Comercial',
-                                'Prestação de Serviços'
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.ubuntu(
-                                        fontSize: 24, fontWeight: FontWeight.w500),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                          ],
+                          ),
+                          counterStyle: TextStyle(color: Colors.black),
+                          filled: true,
+                          fillColor: Colors.grey[100],
                         ),
+                        style: GoogleFonts.ubuntu(
+                            color: Colors.black, fontSize: 22),
+                        controller: _ramoController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Preencha o campo";
+                          } else {
+                            return null;
+                          }
+                        },
                       ),
 
+                      // Padding(
+                      //   padding: EdgeInsets.all(10.0),
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: <Widget>[
+                      //       Text(
+                      //         'Ramo de Atuação',
+                      //         textAlign: TextAlign.center,
+                      //         style:
+                      //             GoogleFonts.ubuntu(fontSize: 22, color: Colors.black),
+                      //       ),
+                      //       DropdownButton<String>(
+                      //         value: typeBussines,
+                      //         icon: Icon(Icons.arrow_downward),
+                      //         iconSize: 32,
+                      //         elevation: 18,
+                      //         style: TextStyle(color: Colors.deepPurple),
+                      //         underline: Container(
+                      //           height: 4,
+                      //           color: Colors.deepPurpleAccent,
+                      //         ),
+                      //         onChanged: (String newValue) {
+                      //           setState(() {
+                      //             typeBussines = newValue;
+                      //             _carg = typeBussines;
+                      //             print(_carg);
+                      //           });
+                      //         },
+                      //         items: <String>[
+                      //           'Industrial',
+                      //           'Comercial',
+                      //           'Prestação de Serviços'
+                      //         ].map<DropdownMenuItem<String>>((String value) {
+                      //           return DropdownMenuItem<String>(
+                      //             value: value,
+                      //             child: Text(
+                      //               value,
+                      //               textAlign: TextAlign.center,
+                      //               style: GoogleFonts.ubuntu(
+                      //                   fontSize: 24, fontWeight: FontWeight.w500),
+                      //             ),
+                      //           );
+                      //         }).toList(),
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
+
                       SizedBox(
-                        height: 5,
+                        height: 20,
                       ),
 
                       FlatButton(
@@ -385,19 +407,17 @@ class _CadCompanyState extends State<CadCompany> {
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             _addCompany();
-
+                            Navigator.of(context).pop();
                             //SNACK-BAR PARA AVISAR UM OK-SUCESSO!
                             SnackBar snkBar = SnackBar(
                               content: Text(
                                 '${_empresaController.text} cadastrado com sucesso'),
                             );
                             Scaffold.of(context).showSnackBar(snkBar);
-                            Navigator.of(context).pop();
                             print('FOI - ${getCompanies()}');
                           }
                         },
                       ),
-
                       SizedBox(
                         height: 30,
                       ),
