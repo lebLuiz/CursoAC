@@ -4,6 +4,7 @@ class Empresa {
 
   int id;
   String empresa;
+  String avatar_url;
   String cnpj;
   String responsavel;
   String telefone;
@@ -17,6 +18,7 @@ class Empresa {
   Empresa({
     @required this.id,
     @required this.empresa,
+    @required this.avatar_url,
     @required this.cnpj,
     @required this.responsavel,
     @required this.telefone,
@@ -32,6 +34,7 @@ class Empresa {
     return Empresa(
       id: json['id'],
       empresa: json['empresa'],
+      avatar_url: json['avatar_url'],
       cnpj: json['cnpj'],
       responsavel: json['responsavel'],
       telefone: json['telefone'],
@@ -59,6 +62,7 @@ class Empresa {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['empresa'] = this.empresa;
+    data['avatar_url'] = this.avatar_url;
     data['cnpj'] = this.cnpj;
     data['responsavel'] = this.responsavel;
     data['telefone'] = this.telefone;

@@ -74,6 +74,10 @@ class ListRepository extends StatelessWidget {
     }
     return ListView.builder(
       itemBuilder: (context, index) {
+        final avatar = empresas[index].avatar_url == null || empresas[index].avatar_url.isEmpty
+        ? CircleAvatar(child: Icon(Icons.business_center, color: Colors.white, ), backgroundColor: Colors.black,)
+        : CircleAvatar(backgroundImage: NetworkImage(empresas[index].avatar_url ),);
+
         return Card(
           margin: EdgeInsets.all(15.0),
           shadowColor: Colors.purple[900],
@@ -82,13 +86,7 @@ class ListRepository extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListTile(
-                  leading: CircleAvatar(
-                    child: Icon(
-                      Icons.business_center,
-                      color: Colors.white,
-                    ),
-                    backgroundColor: Colors.black,
-                  ),
+                  leading: avatar,
                   title: Text(
                     empresas[index].empresa,
                     style: GoogleFonts.ubuntu(

@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-final listC = List<Company>();
+final listC = List<Estados>();
 
-Future<List<Company>> getStates() async {
+Future<List<Estados>> getStates() async {
   final res = await http.get('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-  /*final c = Company(nome: '${res.body}');
+  /*final c = Estados(nome: '${res.body}');
   c.nome = '${res.body}/nome';*/
 
   //NO PRINT PUXA TODAS AS CIDADES.
@@ -16,22 +16,22 @@ Future<List<Company>> getStates() async {
   if(res.statusCode == 200) {
     //ASSIM DA CERTO:
     List jsonRes = json.decode(res.body);
-    return jsonRes.map((v) => new Company.fromJson(v)).toList();
+    return jsonRes.map((v) => new Estados.fromJson(v)).toList();
     
 
-    //return Company.fromJson(json.decode(res.body.toString()));
+    //return Estados.fromJson(json.decode(res.body.toString()));
     /*for (int i=0; i<=27; i++) {
       final r = '${res.body}/${i}';
 
-      listC.add(Company.fromJson(json.decode(r)));
+      listC.add(Estados.fromJson(json.decode(r)));
     }
 
     print(listC.asMap());*/
 
     /*for(int i=0; i<=res.body.length; i++) {
-      listC.add(Company.fromJson());
+      listC.add(Estados.fromJson());
 
-      return Company.fromJson(json.decode(res.body)[i]);
+      return Estados.fromJson(json.decode(res.body)[i]);
     }*/
     
   } else {
@@ -39,16 +39,16 @@ Future<List<Company>> getStates() async {
   }
 }
 
-class Company {
+class Estados {
   final int id;
   final String sigla;
   final String nome;
   /*final Regiao regiao;
   final List<String> c;*/
 
-  Company({this.id, this.sigla, this.nome /*this.regiao, this.c*/});
+  Estados({this.id, this.sigla, this.nome /*this.regiao, this.c*/});
 
-  factory Company.fromJson(Map<String, dynamic> json) {
+  factory Estados.fromJson(Map<String, dynamic> json) {
     /*id = json['id'];
     sigla = json['sigla'];
     nome = json['nome'];
@@ -58,7 +58,7 @@ class Company {
     /*var cFromJson = json['nome'];
     List<String> cList = cFromJson.cast<String>();*/
 
-    return Company(
+    return Estados(
       id: json['id'],
       sigla: json['sigla'],
       nome: json['nome'],
@@ -100,18 +100,18 @@ class Regiao {
   }
 }
 
-// class Company {
+// class Estados {
 //   int id;
 //   String sigla;
 //   String nome;
 
-//   Company({
+//   Estados({
 //     @required this.id,
 //     @required this.sigla,
 //     @required this.nome
 //   });
 
-//   Company.fromJson(Map<String, dynamic> json) {
+//   Estados.fromJson(Map<String, dynamic> json) {
 //     id = json['id'];
 //     sigla = json['sigla'];
 //     nome = json['nome'];
@@ -126,7 +126,7 @@ class Regiao {
   
 // }
 
-/*class Company{
+/*class Estados{
   int id;
   String empresa;
   int cnpj;
@@ -139,7 +139,7 @@ class Regiao {
   String cidade;
   String areaAtuacao;
 
-  Company({
+  Estados({
     @required this.id,
     @required this.empresa,
     @required this.cnpj,
@@ -153,7 +153,7 @@ class Regiao {
     @required this.areaAtuacao,
   });
 
-  Company.fromJson(Map<String, dynamic> json) {
+  Estados.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     empresa = json['empresa'];
     cnpj = json['cnpj'];

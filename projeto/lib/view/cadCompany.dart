@@ -15,6 +15,7 @@ class _CadCompanyState extends State<CadCompany> {
   //Future<Company> futureCompany;
 
   final _empresaController = TextEditingController();
+  final _avatarUrlController = TextEditingController();
   final _cnpjController = TextEditingController();
   final _responsavelController = TextEditingController();
   final _telefoneController = TextEditingController();
@@ -55,6 +56,7 @@ class _CadCompanyState extends State<CadCompany> {
       final e = Empresa(
         id: DateTime.now().millisecondsSinceEpoch,
         empresa: _empresaController.text,
+        avatar_url: _avatarUrlController.text,
         cnpj: _cnpjController.text,
         responsavel: _responsavelController.text,
         telefone: _telefoneController.text,
@@ -72,6 +74,7 @@ class _CadCompanyState extends State<CadCompany> {
       //getCompanies();
 
       _empresaController.text = '';
+      _avatarUrlController.text = '';
       _cnpjController.text = '';
       _responsavelController.text = '';
       _telefoneController.text = '';
@@ -112,7 +115,7 @@ class _CadCompanyState extends State<CadCompany> {
       body: Builder(
         builder: (BuildContext context) {
           return Padding(
-            padding: EdgeInsets.all(25.0),
+            padding: EdgeInsets.all(10.0),
             child: ListView(
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.all(3.0),
@@ -142,8 +145,42 @@ class _CadCompanyState extends State<CadCompany> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       TextFormField(
+                        keyboardType: TextInputType.url,
+                        decoration: myDecoration(
+                            'URL da Logo (opcional)',
+                            Icon(
+                              Icons.wallpaper,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            'https://',
+                            TextStyle(
+                              height: 0,
+                              fontSize: 0,
+                              color: Colors.black,
+                            )),
+                        style: GoogleFonts.ubuntu(
+                            color: Colors.black, fontSize: 20),
+                        controller: _avatarUrlController,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: myDecoration("Empresa"),
+                        decoration: myDecoration(
+                            "Empresa",
+                            Icon(
+                              Icons.domain,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "Empresa",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _empresaController,
@@ -160,7 +197,19 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.number,
-                        decoration: myDecoration("CNPJ"),
+                        decoration: myDecoration(
+                            "CNPJ",
+                            Icon(
+                              Icons.group_work,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "00.000.000/0000-00",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _cnpjController,
@@ -177,7 +226,19 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: myDecoration("Responsável"),
+                        decoration: myDecoration(
+                            "Responsável",
+                            Icon(
+                              Icons.person_outline,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "Responsável",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _responsavelController,
@@ -194,7 +255,19 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.phone,
-                        decoration: myDecoration("Telefone"),
+                        decoration: myDecoration(
+                            "Telefone",
+                            Icon(
+                              Icons.phone,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "Telefone",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _telefoneController,
@@ -211,7 +284,19 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.emailAddress,
-                        decoration: myDecoration("E-mail"),
+                        decoration: myDecoration(
+                            "E-mail",
+                            Icon(
+                              Icons.email,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "email",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _emailController,
@@ -226,12 +311,21 @@ class _CadCompanyState extends State<CadCompany> {
                       SizedBox(
                         height: 15,
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: myDecoration("Endereço"),
+                        decoration: myDecoration(
+                            "Endereço",
+                            Icon(
+                              Icons.pin_drop,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "Endereço",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _enderecoController,
@@ -248,7 +342,19 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: myDecoration("N°-Complemento"),
+                        decoration: myDecoration(
+                            "N°-Complemento",
+                            Icon(
+                              Icons.place,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "N°-Complemento",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _endereco2Controller,
@@ -266,7 +372,19 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: myDecoration("Estado"),
+                        decoration: myDecoration(
+                            "Estado",
+                            Icon(
+                              Icons.location_searching,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "Estado",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _estadoController,
@@ -283,7 +401,19 @@ class _CadCompanyState extends State<CadCompany> {
                       ),
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: myDecoration("Cidade"),
+                        decoration: myDecoration(
+                            "Cidade",
+                            Icon(
+                              Icons.location_city,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            "Cidade",
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _cidadeController,
@@ -302,31 +432,19 @@ class _CadCompanyState extends State<CadCompany> {
                       //CASO DER B.O COM O DropDownButton, USO O TextFormField
                       TextFormField(
                         keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: 'Ramo de Atuação',
-                          labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.black),
-                          alignLabelWithHint: true,
-                          hintText: 'ex: Industrial',
-                          hintStyle: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.black54,
-                          ),
-                          errorStyle: TextStyle(
-                            height: 0,
-                            fontSize: 0,
-                            color: Colors.red,
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(
+                        decoration: myDecoration(
+                            'Ramo de Atuação',
+                            Icon(
+                              Icons.work,
                               color: Colors.black,
-                              width: 2,
+                              size: 30,
                             ),
-                          ),
-                          counterStyle: TextStyle(color: Colors.black),
-                          filled: true,
-                          fillColor: Colors.grey[100],
-                        ),
+                            'ex: Industrial',
+                            TextStyle(
+                              height: 0.8,
+                              fontSize: 16,
+                              color: Colors.red,
+                            )),
                         style: GoogleFonts.ubuntu(
                             color: Colors.black, fontSize: 22),
                         controller: _ramoController,
@@ -339,6 +457,7 @@ class _CadCompanyState extends State<CadCompany> {
                         },
                       ),
 
+                      //COM DropDownButton - COM PROBLEMA!
                       // Padding(
                       //   padding: EdgeInsets.all(10.0),
                       //   child: Column(
@@ -391,32 +510,40 @@ class _CadCompanyState extends State<CadCompany> {
                         height: 20,
                       ),
 
-                      FlatButton(
-                        child: Text(
-                          'Cadastrar',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.ubuntu(
-                            color: Colors.white,
-                            fontSize: 28,
+                      Container(
+                        margin: EdgeInsets.all(0),
+                        color: Colors.purple[900],
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          child: FlatButton(
+                            padding: EdgeInsets.all(0),
+                            child: Text(
+                              'Cadastrar',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.ubuntu(
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontWeight: FontWeight.w600,
+                                letterSpacing: 2.5
+                              ),
+                            ),
+                            splashColor: Colors.deepPurple[900],
+                            onPressed: () {
+                              if (_formKey.currentState.validate()) {
+                                _addCompany();
+                                Navigator.of(context).pop();
+                                //SNACK-BAR PARA AVISAR UM OK-SUCESSO!
+                                SnackBar snkBar = SnackBar(
+                                  content: Text(
+                                      '${_empresaController.text} cadastrado com sucesso'),
+                                      duration: Duration(milliseconds: 3000),
+                                );
+                                Scaffold.of(context).showSnackBar(snkBar);
+                                print('FOI - ${getCompanies()}');
+                              }
+                            },
                           ),
                         ),
-                        color: Colors.purple[900],
-                        splashColor: Colors.deepPurple[900],
-                        padding: EdgeInsets.only(
-                            bottom: 10.0, top: 10.0, left: 80.0, right: 80.0),
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            _addCompany();
-                            Navigator.of(context).pop();
-                            //SNACK-BAR PARA AVISAR UM OK-SUCESSO!
-                            SnackBar snkBar = SnackBar(
-                              content: Text(
-                                '${_empresaController.text} cadastrado com sucesso'),
-                            );
-                            Scaffold.of(context).showSnackBar(snkBar);
-                            print('FOI - ${getCompanies()}');
-                          }
-                        },
                       ),
                       SizedBox(
                         height: 30,
@@ -434,27 +561,30 @@ class _CadCompanyState extends State<CadCompany> {
 }
 
 //PADRÃO DE DECORAÇÃO DOS INPUT'S
-InputDecoration myDecoration(String title) {
+InputDecoration myDecoration(
+    String title, Icon avatar, String hintText, TextStyle errorStyle) {
   InputDecoration _decorations = InputDecoration(
+    icon: avatar,
     labelText: title,
-    labelStyle: TextStyle(fontSize: 20, color: Colors.black),
+    labelStyle: TextStyle(fontSize: 20.0, color: Colors.purple[900]),
     alignLabelWithHint: true,
-    hintText: title,
+    hintText: hintText,
     hintStyle: TextStyle(
-      fontSize: 20.0,
+      fontSize: 18.0,
       color: Colors.black54,
-    ),
-    errorStyle: TextStyle(
-      height: 0,
-      fontSize: 0,
-      color: Colors.red,
     ),
     border: OutlineInputBorder(
       borderSide: BorderSide(
-        color: Colors.black,
-        width: 2,
+        color: Colors.purple[900],
+        width: 0.5,
       ),
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(0),
+          topRight: Radius.circular(15),
+          bottomRight: Radius.circular(0),
+          bottomLeft: Radius.circular(15)),
     ),
+    errorStyle: errorStyle,
     counterStyle: TextStyle(color: Colors.black),
     filled: true,
     fillColor: Colors.grey[100],

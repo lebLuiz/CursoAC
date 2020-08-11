@@ -217,12 +217,19 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600),
                                             ),
-                                            Text(
-                                              _empresa[index].endereco2,
-                                              style: GoogleFonts.ubuntu(
-                                                  color: Colors.grey[800],
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500),
+                                            Flex(
+                                              direction: Axis.horizontal,
+                                              children: <Widget>[
+                                                Text(
+                                                 _empresa[index].endereco2,
+                                                  style: GoogleFonts.ubuntu(
+                                                    color: Colors.grey[800],
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w500
+                                                  ),
+                                                  maxLines: 7,
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),

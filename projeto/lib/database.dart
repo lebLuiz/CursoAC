@@ -27,7 +27,7 @@ class DBProvider {
   }
 
   void _onCreate(Database db, int version) async {
-    await db.execute("create table empresa(id integer, empresa text, cnpj text, responsavel text, telefone text, email text, endereco text, endereco2 text, estado text, cidade text, ramo text);");
+    await db.execute("create table empresa(id integer, avatar_url text, empresa text, cnpj text, responsavel text, telefone text, email text, endereco text, endereco2 text, estado text, cidade text, ramo text);");
   }
 
   selectAll() async {
