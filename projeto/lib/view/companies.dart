@@ -71,6 +71,34 @@ class _ListCompaniesState extends State<ListCompanies> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10, left: 15, top: 10, bottom: 0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                            '${_empresas.length} ',
+                            style: GoogleFonts.openSans(
+                              color: Colors.purple[900],
+                              fontSize: 19,
+                              fontWeight: FontWeight.w700
+                            ),
+                        ),
+                        Text(
+                          'empresa(s) registradas.',
+                          style: GoogleFonts.openSans(
+                          color: Colors.grey[800],
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                  SizedBox(
+                    height: 5,
+                  ),
                   Expanded(
                     child: ListRepository(
                       empresas: _empresas,

@@ -67,17 +67,17 @@ class _HomeState extends State<Home> {
     return _toDoList;
   }
 
-  List<Empresa> _toListTest = [];
+  List<Empresa> _listAllCompanies = [];
   Future<void> getAllEmpresas() async {
     List res = await DBProvider.db.selectAll();
 
-    _toListTest = [];
+    _listAllCompanies = [];
 
     res.forEach((element) {
-      _toListTest.add(Empresa.fromJson(element));
+      _listAllCompanies.add(Empresa.fromJson(element));
     });
 
-    return _toListTest;
+    return _listAllCompanies;
   }
 
   //ATENÇÃO!! - CASO QUEIRA LIMPAR OS DADOS - PARA TESTE
@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     getAllEmpresas();
 
-    print('Quant registros ao todo: ${_toListTest.length}');
+    print('Quant registros ao todo: ${_listAllCompanies.length}');
 
     return Scaffold(
       backgroundColor: Colors.white,

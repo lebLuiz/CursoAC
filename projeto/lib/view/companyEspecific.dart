@@ -39,7 +39,7 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
             Navigator.pop(context);
           },
         ),
-        elevation: 0.0,
+        elevation: 0,
         backgroundColor: Colors.transparent,
       ),
       body: FutureBuilder(
@@ -47,30 +47,39 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
         builder: (ctx, i) {
           return Container(
             alignment: Alignment.center,
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.only(top: 20, bottom: 10, right: 10, left: 10),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Expanded(
                   child: ListView.builder(
                     itemBuilder: (context, index) {
+                      final avatar = _empresa[index].avatar_url == null ||
+                              _empresa[index].avatar_url.isEmpty
+                          ? CircleAvatar(
+                              child: Icon(
+                                Icons.business_center,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                              backgroundColor: Colors.black,
+                              maxRadius: 40,
+                            )
+                          : CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(_empresa[index].avatar_url),
+                              maxRadius: 40,
+                            );
+
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
                           Center(
-                            heightFactor: 0.5,
+                            heightFactor: 1,
                             widthFactor: 10,
                             child: Column(
                               children: <Widget>[
-                                CircleAvatar(
-                                  backgroundColor: Colors.black,
-                                  child: Icon(
-                                    Icons.business_center,
-                                    color: Colors.white,
-                                    size: 40,
-                                  ),
-                                  maxRadius: 40,
-                                ),
+                                avatar,
                                 SizedBox(
                                   height: 15,
                                 ),
@@ -99,7 +108,7 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                             ),
                           ),
                           SizedBox(
-                            height: 70,
+                            height: 8,
                           ),
                           Column(
                             children: <Widget>[
@@ -130,18 +139,12 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                               MainAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              'Telefone:  ',
+                                              'Telefone',
                                               style: GoogleFonts.ubuntu(
-                                                  color: Colors.black,
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Text(
-                                              _empresa[index].telefone,
-                                              style: GoogleFonts.ubuntu(
-                                                  color: Colors.grey[800],
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w500),
+                                                color: Colors.black,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w600
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -149,22 +152,49 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                           height: 5,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
                                           children: <Widget>[
-                                            Text(
-                                              'Email:  ',
-                                              style: GoogleFonts.ubuntu(
-                                                  color: Colors.black,
-                                                  fontSize: 22,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Text(
-                                              _empresa[index].email,
-                                              style: GoogleFonts.ubuntu(
+                                            Flexible(
+                                              child: Text(
+                                               _empresa[index].telefone,
+                                                style: GoogleFonts.ubuntu(
                                                   color: Colors.grey[800],
                                                   fontSize: 20,
-                                                  fontWeight: FontWeight.w500),
+                                                  fontWeight: FontWeight.w500
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                              'Email',
+                                              style: GoogleFonts.ubuntu(
+                                                color: Colors.black,
+                                                fontSize: 22,
+                                                fontWeight: FontWeight.w600
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 5,
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            Flexible(
+                                              child: Text(
+                                                _empresa[index].email,
+                                                style: GoogleFonts.ubuntu(
+                                                  color: Colors.grey[800],
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w500
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -184,52 +214,60 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                           height: 8,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              'Bairro: ',
+                                              'Bairro',
                                               style: GoogleFonts.ubuntu(
                                                   color: Colors.black,
-                                                  fontSize: 20,
+                                                  fontSize: 21,
                                                   fontWeight: FontWeight.w600),
-                                            ),
-                                            Text(
-                                              _empresa[index].endereco,
-                                              style: GoogleFonts.ubuntu(
-                                                  color: Colors.grey[800],
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500),
                                             ),
                                           ],
                                         ),
+                                        Row(
+                                          children: <Widget>[
+                                            Flexible(
+                                              child: Text(
+                                                _empresa[index].endereco,
+                                                style: GoogleFonts.ubuntu(
+                                                  color: Colors.grey[800],
+                                                  fontSize: 19,
+                                                  fontWeight: FontWeight.w500
+                                                ),
+                                                maxLines: 3,
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                         SizedBox(
-                                          height: 5,
+                                          height: 15,
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
-                                              'N°/Complemento: ',
+                                              'N°/Complemento',
                                               style: GoogleFonts.ubuntu(
-                                                  color: Colors.black,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600),
+                                                color: Colors.black,
+                                                fontSize: 21,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                            Flex(
-                                              direction: Axis.horizontal,
-                                              children: <Widget>[
-                                                Text(
-                                                 _empresa[index].endereco2,
-                                                  style: GoogleFonts.ubuntu(
+                                          ],
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            Flexible(
+                                              child: Text(
+                                                _empresa[index].endereco2,
+                                                style: GoogleFonts.ubuntu(
                                                     color: Colors.grey[800],
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500
-                                                  ),
-                                                  maxLines: 7,
-                                                ),
-                                              ],
+                                                    fontSize: 19,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                                maxLines: 5,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -238,11 +276,11 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                           child: Divider(
                                             height: 3,
                                             color: Colors.black,
+                                            thickness: 1.0,
                                           ),
                                         ),
                                         Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           children: <Widget>[
                                             Text(
                                               'Responsável: ',
@@ -251,17 +289,28 @@ class _CompanyEspecificState extends State<CompanyEspecific> {
                                                   fontSize: 20,
                                                   fontWeight: FontWeight.w600),
                                             ),
-                                            Text(
-                                              _empresa[index].responsavel,
-                                              style: GoogleFonts.ubuntu(
-                                                  color: Colors.grey[800],
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
                                           ],
                                         ),
                                         SizedBox(
                                           height: 5,
+                                        ),
+                                        Row(
+                                          children: <Widget>[
+                                            Flexible(
+                                              child: Text(
+                                                _empresa[index].responsavel,
+                                                style: GoogleFonts.ubuntu(
+                                                    color: Colors.grey[800],
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.w500
+                                                ),
+                                                maxLines: 3,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 15,
                                         ),
                                         Row(
                                           mainAxisAlignment:

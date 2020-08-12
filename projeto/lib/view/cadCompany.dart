@@ -185,7 +185,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _empresaController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty ) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -214,7 +214,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _cnpjController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -243,7 +243,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _responsavelController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -272,7 +272,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _telefoneController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -301,7 +301,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _emailController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -330,7 +330,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _enderecoController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -359,7 +359,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _endereco2Controller,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -389,7 +389,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _estadoController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -418,7 +418,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _cidadeController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -449,7 +449,7 @@ class _CadCompanyState extends State<CadCompany> {
                             color: Colors.black, fontSize: 22),
                         controller: _ramoController,
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value == null ||  value.isEmpty || value.trim().isEmpty) {
                             return "Preencha o campo";
                           } else {
                             return null;
@@ -531,14 +531,22 @@ class _CadCompanyState extends State<CadCompany> {
                             onPressed: () {
                               if (_formKey.currentState.validate()) {
                                 _addCompany();
-                                Navigator.of(context).pop();
+
                                 //SNACK-BAR PARA AVISAR UM OK-SUCESSO!
                                 SnackBar snkBar = SnackBar(
                                   content: Text(
-                                      '${_empresaController.text} cadastrado com sucesso'),
-                                      duration: Duration(milliseconds: 3000),
+                                    '${_empresaController.text} registrado com sucesso',
+                                    textAlign: TextAlign.start,
+                                    style: GoogleFonts.openSans(
+                                      color: Colors.white,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600
+                                    ),
+                                    ),
+                                  duration: Duration(milliseconds: 5000),
                                 );
                                 Scaffold.of(context).showSnackBar(snkBar);
+                                
                                 print('FOI - ${getCompanies()}');
                               }
                             },
