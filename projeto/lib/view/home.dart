@@ -81,9 +81,9 @@ class _HomeState extends State<Home> {
   }
 
   //ATENÇÃO!! - CASO QUEIRA LIMPAR OS DADOS - PARA TESTE
-  // Future<void> deleteAll() async {
-  //   await DBProvider.db.removeAll();
-  // }
+  Future<void> deleteAll() async {
+    await DBProvider.db.removeAll();
+  }
 
   @override
   void initState() {
@@ -191,7 +191,7 @@ class _HomeState extends State<Home> {
                                 right: 80.0),
                             onPressed: () {
                               //ATENÇÃO!! - PARA TESTE
-                              // deleteAll();
+                              //deleteAll();
                               createAlertDialog(context).then((value) {
                                 print(value);
                                 if (value == null ||
